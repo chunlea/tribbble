@@ -2,6 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tribbble</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.chunlea.tribbble</string>
+		</dict>
+	</array>
+	<key>DribbbleAccessToken</key>
+	<string>a28b487c0318856214132865ddc1de20f0f02492b4d6104d80c4be518e6280ac</string>
+	<key>DribbbleSecret</key>
+	<string>025a1aa4a37d517fa9a2c11a8f7f5ce591784f8f977be559633c377cc22577aa</string>
+	<key>DribbbleClientID</key>
+	<string>6084a9bbe987ef54aaecbbd24b83bfb9393542a6c4befae7cd11707c1e9861d2</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

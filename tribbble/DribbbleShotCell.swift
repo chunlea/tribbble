@@ -17,15 +17,10 @@ class DribbbleShotCell: UICollectionViewCell {
     
     override func drawRect(rect: CGRect)
     {
-        layer.masksToBounds = true
-        layer.cornerRadius = 2.0
-
-        // The shadowlayer seems not working well with cornerRadius
-        let shadowLayer = CALayer()
-        shadowLayer.shadowColor = UIColor.blackColor().CGColor
-        shadowLayer.shadowOpacity = 0.07
-        shadowLayer.shadowRadius = 2.0
-        shadowLayer.shadowOffset = CGSizeMake(0.0, 2.0)
-        layer.addSublayer(shadowLayer)
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowOpacity = 0.07
+        layer.shadowRadius = 2.0
+        layer.shadowOffset = CGSizeMake(0.0, 2.0)
     }
 }

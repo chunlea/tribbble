@@ -17,6 +17,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let session = NSURLSession.sharedSession()
+        session.configuration.allowsCellularAccess = false
+        session.configuration.HTTPAdditionalHeaders = ["Accept": "application/json"]
+        session.configuration.timeoutIntervalForRequest = 30.0
+        session.configuration.timeoutIntervalForResource = 60.0
+        session.configuration.HTTPMaximumConnectionsPerHost = 1
+        
+        return true
+    }
+    
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        // analyze URL here
+        print(url)
+        print(url.query!)
+        
+        var code = NSURLComponents(URL: url, resolvingAgainstBaseURL: true)?.queryItems?.filter({(item) in item.name == "code"}).first!.value
+
+        let client_id = NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleClientID")!
+        let client_secret = NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleSecret")!
+        let redirect_uri = "tribbble://oauth-code"
+
+//        var params: [String: AnyObject?] = [
+//            "client_id": NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleClientID")!,
+//            "client_secret": NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleSecret")!,
+//            "code": code,
+//            "redirect_uri": "tribbble://oauth-token"
+//        ]
+        
+        var params = "client_id=\(client_id)&client_secret=\(client_secret)&code=\(code!)&redirect_uri=\(redirect_uri)"
+        
+        var ready = false
+        var content: String!
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://dribbble.com/oauth/token")!)
+        request.HTTPMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = params.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: false)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            (data, response, error) -> Void in
+            content = NSString(data: data!, encoding: NSASCIIStringEncoding) as! String
+            ready = true
+        }
+        task.resume()
+        while !ready {
+            usleep(10)
+        }
+        if content != nil {
+            print(content)
+        } else {
+            print("Nothing")
+        }
+        
         return true
     }
 

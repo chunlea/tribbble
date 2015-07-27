@@ -12,7 +12,10 @@ private let reuseIdentifier = "Cell"
 
 class HomeViewController: UICollectionViewController {
     private let reuseIdentifier = "ShotCell"
+    private var shots = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,7,8,9,0,1,2,3,4,5,6,7,8,9,0]
 
+    @IBOutlet var LoginButtonsView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,10 +26,19 @@ class HomeViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-//        self.collectionView!.registerClass(DribbbleShotCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
         // Do any additional setup after loading the view.
+        let login_state = false
+        if login_state {
+            navigationController?.navigationBar.barTintColor = UIColor(red: 236/255.0, green: 73/255.0, blue: 139/255.0, alpha: 0.6)
+            navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+        } else {
+            LoginButtonsView.translatesAutoresizingMaskIntoConstraints = false
+            
+            view.addSubview(LoginButtonsView)
+
+            view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-20-[LoginButtonsView]-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
+            view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[LoginButtonsView]-|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +46,15 @@ class HomeViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    @IBAction func SignInAction(sender: AnyObject) {
+        let clientID = NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleClientID")!
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://dribbble.com/oauth/authorize?client_id=\(clientID)&redirect_uri=tribbble://oauth-code&scope=public+write+comment+upload")!)
+    }
+    @IBAction func SignUpAction(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://dribbble.com/signup")!)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -54,14 +75,14 @@ class HomeViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 100
+        return self.shots.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! DribbbleShotCell
 
         cell.backgroundColor = UIColor.whiteColor()
-
+        
         cell.viewsCount.text = "120"
         cell.likesCount.text = "250"
         cell.commentsCount.text = "123"
