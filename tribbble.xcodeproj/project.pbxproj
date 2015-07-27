@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		8C3599141B63D37800A85EDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3599131B63D37800A85EDC /* AppDelegate.swift */; };
-		8C3599161B63D37800A85EDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3599151B63D37800A85EDC /* ViewController.swift */; };
 		8C3599191B63D37800A85EDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C3599171B63D37800A85EDC /* Main.storyboard */; };
 		8C35991C1B63D37800A85EDC /* tribbble.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C35991A1B63D37800A85EDC /* tribbble.xcdatamodeld */; };
 		8C35991E1B63D37800A85EDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C35991D1B63D37800A85EDC /* Assets.xcassets */; };
 		8C3599211B63D37800A85EDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C35991F1B63D37800A85EDC /* LaunchScreen.storyboard */; };
 		8C35992C1B63D37800A85EDC /* tribbbleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C35992B1B63D37800A85EDC /* tribbbleTests.swift */; };
 		8C3599371B63D37800A85EDC /* tribbbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3599361B63D37800A85EDC /* tribbbleUITests.swift */; };
+		8CB2FFC81B661CC000B2D274 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */; };
+		8CB2FFCA1B661D5000B2D274 /* DribbbleShotsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFC91B661D5000B2D274 /* DribbbleShotsFetcher.swift */; };
+		8CB2FFCC1B66228200B2D274 /* DribbbleShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */; };
+		8CB2FFCF1B663FCF00B2D274 /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFCE1B663FCF00B2D274 /* Shot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +40,6 @@
 /* Begin PBXFileReference section */
 		8C3599101B63D37800A85EDC /* tribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3599131B63D37800A85EDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8C3599151B63D37800A85EDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8C3599181B63D37800A85EDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C35991B1B63D37800A85EDC /* tribbble.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tribbble.xcdatamodel; sourceTree = "<group>"; };
 		8C35991D1B63D37800A85EDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +51,10 @@
 		8C3599321B63D37800A85EDC /* tribbbleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tribbbleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3599361B63D37800A85EDC /* tribbbleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tribbbleUITests.swift; sourceTree = "<group>"; };
 		8C3599381B63D37800A85EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8CB2FFC91B661D5000B2D274 /* DribbbleShotsFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleShotsFetcher.swift; sourceTree = "<group>"; };
+		8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleShotCell.swift; sourceTree = "<group>"; };
+		8CB2FFCE1B663FCF00B2D274 /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shot.swift; path = Models/Shot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +105,16 @@
 		8C3599121B63D37800A85EDC /* tribbble */ = {
 			isa = PBXGroup;
 			children = (
+				8CB2FFCD1B663FA100B2D274 /* Models */,
 				8C3599131B63D37800A85EDC /* AppDelegate.swift */,
-				8C3599151B63D37800A85EDC /* ViewController.swift */,
 				8C3599171B63D37800A85EDC /* Main.storyboard */,
 				8C35991D1B63D37800A85EDC /* Assets.xcassets */,
 				8C35991F1B63D37800A85EDC /* LaunchScreen.storyboard */,
 				8C3599221B63D37800A85EDC /* Info.plist */,
 				8C35991A1B63D37800A85EDC /* tribbble.xcdatamodeld */,
+				8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */,
+				8CB2FFC91B661D5000B2D274 /* DribbbleShotsFetcher.swift */,
+				8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */,
 			);
 			path = tribbble;
 			sourceTree = "<group>";
@@ -126,6 +135,14 @@
 				8C3599381B63D37800A85EDC /* Info.plist */,
 			);
 			path = tribbbleUITests;
+			sourceTree = "<group>";
+		};
+		8CB2FFCD1B663FA100B2D274 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8CB2FFCE1B663FCF00B2D274 /* Shot.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +275,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C3599161B63D37800A85EDC /* ViewController.swift in Sources */,
 				8C35991C1B63D37800A85EDC /* tribbble.xcdatamodeld in Sources */,
 				8C3599141B63D37800A85EDC /* AppDelegate.swift in Sources */,
+				8CB2FFCC1B66228200B2D274 /* DribbbleShotCell.swift in Sources */,
+				8CB2FFC81B661CC000B2D274 /* HomeViewController.swift in Sources */,
+				8CB2FFCA1B661D5000B2D274 /* DribbbleShotsFetcher.swift in Sources */,
+				8CB2FFCF1B663FCF00B2D274 /* Shot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
