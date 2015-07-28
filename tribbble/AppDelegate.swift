@@ -28,47 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        // analyze URL here
-        print(url)
-        print(url.query!)
+    func application(application: UIApplication, var handleOpenURL url: NSURL) -> Bool {
+        let code = NSURLComponents(URL: url, resolvingAgainstBaseURL: true)?.queryItems?.filter({(item) in item.name == "code"}).first!.value
         
-        var code = NSURLComponents(URL: url, resolvingAgainstBaseURL: true)?.queryItems?.filter({(item) in item.name == "code"}).first!.value
-
-        let client_id = NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleClientID")!
-        let client_secret = NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleSecret")!
-        let redirect_uri = "tribbble://oauth-code"
-
-//        var params: [String: AnyObject?] = [
-//            "client_id": NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleClientID")!,
-//            "client_secret": NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleSecret")!,
-//            "code": code,
-//            "redirect_uri": "tribbble://oauth-token"
-//        ]
-        
-        var params = "client_id=\(client_id)&client_secret=\(client_secret)&code=\(code!)&redirect_uri=\(redirect_uri)"
-        
-        var ready = false
-        var content: String!
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://dribbble.com/oauth/token")!)
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = params.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: false)
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            (data, response, error) -> Void in
-            content = NSString(data: data!, encoding: NSASCIIStringEncoding) as! String
-            ready = true
-        }
-        task.resume()
-        while !ready {
-            usleep(10)
-        }
-        if content != nil {
-            print(content)
-        } else {
-            print("Nothing")
-        }
+        DribbbleAPI().getToken(code!)
         
         return true
     }
