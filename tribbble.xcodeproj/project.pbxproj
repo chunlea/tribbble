@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C0534501B67EC90002467CC /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C05344F1B67EC90002467CC /* Auth.swift */; };
 		8C3599141B63D37800A85EDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3599131B63D37800A85EDC /* AppDelegate.swift */; };
 		8C3599191B63D37800A85EDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C3599171B63D37800A85EDC /* Main.storyboard */; };
 		8C35991C1B63D37800A85EDC /* tribbble.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C35991A1B63D37800A85EDC /* tribbble.xcdatamodeld */; };
@@ -15,7 +16,6 @@
 		8C35992C1B63D37800A85EDC /* tribbbleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C35992B1B63D37800A85EDC /* tribbbleTests.swift */; };
 		8C3599371B63D37800A85EDC /* tribbbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3599361B63D37800A85EDC /* tribbbleUITests.swift */; };
 		8CB2FFC81B661CC000B2D274 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */; };
-		8CB2FFCA1B661D5000B2D274 /* DribbbleShotsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFC91B661D5000B2D274 /* DribbbleShotsFetcher.swift */; };
 		8CB2FFCC1B66228200B2D274 /* DribbbleShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */; };
 		8CFAC1B91B67C9D400825A36 /* DribbbleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFAC1B81B67C9D400825A36 /* DribbbleAPI.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C05344F1B67EC90002467CC /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		8C3599101B63D37800A85EDC /* tribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3599131B63D37800A85EDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C3599181B63D37800A85EDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		8C3599361B63D37800A85EDC /* tribbbleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tribbbleUITests.swift; sourceTree = "<group>"; };
 		8C3599381B63D37800A85EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		8CB2FFC91B661D5000B2D274 /* DribbbleShotsFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleShotsFetcher.swift; sourceTree = "<group>"; };
 		8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleShotCell.swift; sourceTree = "<group>"; };
 		8CFAC1B81B67C9D400825A36 /* DribbbleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,9 +112,9 @@
 				8C3599221B63D37800A85EDC /* Info.plist */,
 				8C35991A1B63D37800A85EDC /* tribbble.xcdatamodeld */,
 				8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */,
-				8CB2FFC91B661D5000B2D274 /* DribbbleShotsFetcher.swift */,
 				8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */,
 				8CFAC1B81B67C9D400825A36 /* DribbbleAPI.swift */,
+				8C05344F1B67EC90002467CC /* Auth.swift */,
 			);
 			path = tribbble;
 			sourceTree = "<group>";
@@ -272,7 +272,7 @@
 				8CFAC1B91B67C9D400825A36 /* DribbbleAPI.swift in Sources */,
 				8CB2FFCC1B66228200B2D274 /* DribbbleShotCell.swift in Sources */,
 				8CB2FFC81B661CC000B2D274 /* HomeViewController.swift in Sources */,
-				8CB2FFCA1B661D5000B2D274 /* DribbbleShotsFetcher.swift in Sources */,
+				8C0534501B67EC90002467CC /* Auth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

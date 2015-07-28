@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class HomeViewController: UICollectionViewController {
     private let reuseIdentifier = "ShotCell"
-    private var shots = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,7,8,9,0,1,2,3,4,5,6,7,8,9,0]
+    private var shots:[DribbbleShot] = []
 
     @IBOutlet var LoginButtonsView: UIView!
     
@@ -23,21 +23,31 @@ class HomeViewController: UICollectionViewController {
         navigationItem.titleView = UIImageView(image: UIImage(named: "tribbble"))
         navigationController?.navigationBar.barStyle = UIBarStyle.Black
 
+        // Add LoginView
+        LoginButtonsView.translatesAutoresizingMaskIntoConstraints = false
+        LoginButtonsView.hidden = true
+        view.addSubview(LoginButtonsView)
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-20-[LoginButtonsView]-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[LoginButtonsView]-|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        shots = DribbbleAPI().getShots()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        // Change the view for Logged user
         // Do any additional setup after loading the view.
-        let login_state = false
-        if login_state {
+        
+//        print(Auth.logged())
+        
+        if Auth.logged() {
             navigationController?.navigationBar.barTintColor = UIColor(red: 236/255.0, green: 73/255.0, blue: 139/255.0, alpha: 0.6)
             navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+            LoginButtonsView.hidden = true
         } else {
-            LoginButtonsView.translatesAutoresizingMaskIntoConstraints = false
-            
-            view.addSubview(LoginButtonsView)
-
-            view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-20-[LoginButtonsView]-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
-            view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[LoginButtonsView]-|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
+            navigationController?.navigationBar.barTintColor = UIColor.clearColor()
+            LoginButtonsView.hidden = false
         }
     }
 
@@ -84,8 +94,8 @@ class HomeViewController: UICollectionViewController {
         cell.backgroundColor = UIColor.whiteColor()
         
         cell.viewsCount.text = "120"
-        cell.likesCount.text = "250"
-        cell.commentsCount.text = "123"
+        cell.likesCount.text = String(shots[indexPath.row].likes_count)
+        cell.commentsCount.text = ""
         cell.shotImage.image = UIImage(named: "LaunchScreenBg")
     
         return cell

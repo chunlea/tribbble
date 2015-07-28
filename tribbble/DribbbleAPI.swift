@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 class DribbbleAPI {
-    internal var baseURL: NSURL { return NSURL(string: "https://api.dribbble.com/v1")! }
+    let baseURL: String = "https://api.dribbble.com/v1"
     let tokenURL: NSURL = NSURL(string: "https://dribbble.com/oauth/token")!
 
     let client_id: String = NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleClientID") as! String
@@ -18,9 +19,9 @@ class DribbbleAPI {
     
     internal var access_token: String {
         let login: Bool = false
-        if login {
+        if Auth.logged() {
             // Get access token from Keychain
-            return "should-get-token-from-Keychain"
+            return Auth.getToken()!
         } else {
             // Get access token from Info.plist
             return NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleAccessToken") as! String
@@ -58,8 +59,13 @@ class DribbbleAPI {
             let httpResp = response as! NSHTTPURLResponse
             
             if (error == nil ) {
-                print("Success")
-                
+                if (parsedData != nil){
+                    guard let tokenStr: String = (parsedData["access_token"] as! String) else { "BadToken" }
+                    print(tokenStr)
+                    print(Auth.setToken(tokenStr))
+                } else {
+                    print("Status Code:\(httpResp.statusCode)\n")
+                }
             } else {
                 if (parsedData != nil){
                     guard let error_type: String = (parsedData["error"] as! String) else { "Can't get Error Type" }
@@ -70,5 +76,78 @@ class DribbbleAPI {
                 }
             }
         }.resume()
+    }
+    
+    func getShots()->[DribbbleShot] {
+        
+        
+        //        var params: [String: AnyObject?] = [
+        //            "client_id": NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleClientID")!,
+        //            "client_secret": NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleSecret")!,
+        //            "code": code,
+        //            "redirect_uri": "tribbble://oauth-token"
+        //        ]
+        
+//        let params = "client_id=\(client_id)&client_secret=\(client_secret)&code=\(code)&redirect_uri=\(redirect_uri)"
+
+        let request = NSMutableURLRequest(URL: NSURL(string: baseURL + "/shots")!)
+        var result: [DribbbleShot] = []
+        var ready = false
+        request.HTTPMethod = "GET"
+        request.setValue("Bearer \(access_token)", forHTTPHeaderField: "Authorization")
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.HTTPBody = params.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: false)
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            (data, response, error) -> Void in
+            
+            let parsedData: [AnyObject]!
+            do {
+                parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options:  NSJSONReadingOptions()) as! [AnyObject]
+            } catch _ {
+                parsedData = nil
+            }
+            
+            let httpResp = response as! NSHTTPURLResponse
+
+            if (error == nil ) {
+                if (parsedData != nil){
+                    for shot in parsedData {
+                        print(shot)
+                        result.append(DribbbleShot(json:shot as! NSDictionary))
+                    }
+                } else {
+                    print("Status Code:\(httpResp.statusCode)\n")
+                }
+            } else {
+//                if (parsedData != nil){
+//                    guard let error_type: String = (parsedData["error"] as! String) else { "Can't get Error Type" }
+//                    guard let error_info: String = (parsedData["error_description"] as! String) else { "Can't get Error Description" }
+//                    print("Status Code:\(httpResp.statusCode)\nError Type:\(error_type)\nError Info:\(error_info)")
+//                } else {
+//                    print("Status Code:\(httpResp.statusCode)\n")
+//                }
+                
+            }
+            ready = true
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }.resume()
+
+        while !ready {
+            usleep(10)
+        }
+        return result
+    }
+
+}
+
+class DribbbleShot: NSObject {
+    internal var likes_count: Int
+    
+    init(json: NSDictionary) {
+        print("From What? \(json)")
+        likes_count = json["likes_count"] as! Int
     }
 }
