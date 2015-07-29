@@ -100,11 +100,9 @@ class HomeViewController: UICollectionViewController {
         cell.backgroundColor = UIColor.whiteColor()
         
         let shot = shots[indexPath.row]
-        print(shot.description)
-        
-        cell.viewsCount.text = String(shot.views_count!)
-        cell.likesCount.text = String(shot.likes_count!)
-        cell.commentsCount.text = String(shot.comments_count!)
+        cell.viewsCount.text = String(shot.views_count)
+        cell.likesCount.text = String(shot.likes_count)
+        cell.commentsCount.text = String(shot.comments_count)
         cell.shotImage.image = UIImage(named: "LaunchScreenBg")
     
         return cell
