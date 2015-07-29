@@ -71,15 +71,24 @@ class HomeViewController: UICollectionViewController {
         UIApplication.sharedApplication().openURL(NSURL(string: "https://dribbble.com/signup")!)
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "OpenShotDetail" {
+            let shotDetailViewController = segue.destinationViewController as! ShotDetailViewController
+            
+            if let indexPath = collectionView!.indexPathForCell((sender as! UICollectionViewCell)) {
+                // use indexPath here
+                shotDetailViewController.shot = self.shots[indexPath.row]
+            }
+        }
+        
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -142,20 +151,9 @@ class HomeViewController: UICollectionViewController {
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
-    //1
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            
-//            print(indexPath)
-            
-//            let flickrPhoto =  photoForIndexPath(indexPath)
-            //2
-//            if var size = flickrPhoto.thumbnail?.size {
-//                size.width += 10
-//                size.height += 10
-//                return size
-//            }
             return CGSize(width: 168, height: 130)
     }
 }
