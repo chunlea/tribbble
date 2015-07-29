@@ -104,9 +104,13 @@ class DribbbleAPI {
             (data, response, error) -> Void in
             
             let parsedData: [AnyObject]!
-            do {
-                parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options:  NSJSONReadingOptions()) as! [AnyObject]
-            } catch _ {
+            if data != nil {
+                do {
+                    parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options:  NSJSONReadingOptions()) as! [AnyObject]
+                } catch _ {
+                    parsedData = nil
+                }
+            } else {
                 parsedData = nil
             }
             
@@ -115,7 +119,6 @@ class DribbbleAPI {
             if (error == nil ) {
                 if (parsedData != nil){
                     for shot in parsedData {
-                        print(shot)
                         result.append(DribbbleShot(json:shot as! NSDictionary))
                     }
                 } else {
@@ -143,11 +146,3 @@ class DribbbleAPI {
 
 }
 
-class DribbbleShot: NSObject {
-    internal var likes_count: Int
-    
-    init(json: NSDictionary) {
-        print("From What? \(json)")
-        likes_count = json["likes_count"] as! Int
-    }
-}
