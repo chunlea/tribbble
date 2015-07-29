@@ -18,7 +18,6 @@ class DribbbleAPI {
     let redirect_uri: String = "tribbble://oauth-code"
     
     internal var access_token: String {
-        let login: Bool = false
         if Auth.logged() {
             // Get access token from Keychain
             return Auth.getToken()!
@@ -78,7 +77,7 @@ class DribbbleAPI {
         }.resume()
     }
     
-    func getShots()->[DribbbleShot] {
+    func getShots(callback: (result: [DribbbleShot], error: String?) -> Void) {
         
         
         //        var params: [String: AnyObject?] = [
@@ -92,7 +91,6 @@ class DribbbleAPI {
 
         let request = NSMutableURLRequest(URL: NSURL(string: baseURL + "/shots")!)
         var result: [DribbbleShot] = []
-        var ready = false
         request.HTTPMethod = "GET"
         request.setValue("Bearer \(access_token)", forHTTPHeaderField: "Authorization")
 //        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
@@ -124,7 +122,15 @@ class DribbbleAPI {
                 } else {
                     print("Status Code:\(httpResp.statusCode)\n")
                 }
+                dispatch_async(dispatch_get_main_queue(), {
+                    callback(result: result, error: nil)
+                })
+                
             } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    callback(result: result, error: "Error!")
+                })
+                
 //                if (parsedData != nil){
 //                    guard let error_type: String = (parsedData["error"] as! String) else { "Can't get Error Type" }
 //                    guard let error_info: String = (parsedData["error_description"] as! String) else { "Can't get Error Description" }
@@ -132,16 +138,10 @@ class DribbbleAPI {
 //                } else {
 //                    print("Status Code:\(httpResp.statusCode)\n")
 //                }
-                
             }
-            ready = true
+
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }.resume()
-
-        while !ready {
-            usleep(10)
-        }
-        return result
     }
 
 }

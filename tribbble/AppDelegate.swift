@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication, var handleOpenURL url: NSURL) -> Bool {
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         let code = NSURLComponents(URL: url, resolvingAgainstBaseURL: true)?.queryItems?.filter({(item) in item.name == "code"}).first!.value
         
         DribbbleAPI().getToken(code!)

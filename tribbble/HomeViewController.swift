@@ -32,14 +32,20 @@ class HomeViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        shots = DribbbleAPI().getShots()
+        
+        DribbbleAPI().getShots() {
+            (result, error) -> Void in
+                self.shots = result
+                print(self.shots)
+                self.collectionView?.reloadData()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         // Change the view for Logged user
         // Do any additional setup after loading the view.
         
-//        print(Auth.logged())
+        print(Auth.logged())
         
         if Auth.logged() {
             navigationController?.navigationBar.barTintColor = UIColor(red: 236/255.0, green: 73/255.0, blue: 139/255.0, alpha: 0.6)
