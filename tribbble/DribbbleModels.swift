@@ -9,13 +9,13 @@
 import Foundation
 
 class DribbbleBucket: NSObject {
-     var id: Int
-     var name: String
-     var descriptions: String
-     var shots_count: Int
-     var created_at: NSDate
-     var updated_at: NSDate
-     var user: DribbbleUser?
+    var id: Int
+    var name: String
+    var descriptions: String
+    var shots_count: Int
+    var created_at: NSDate
+    var updated_at: NSDate
+    var user: DribbbleUser?
     
     init(json: NSDictionary) {
         let dateFor: NSDateFormatter = NSDateFormatter()
@@ -36,13 +36,13 @@ class DribbbleBucket: NSObject {
 }
 
 class DribbbleProject: NSObject {
-     var id: Int
-     var name: String
-     var descriptions: String
-     var shots_count: Int
-     var created_at: NSDate
-     var updated_at: NSDate
-     var user: DribbbleUser?
+    var id: Int
+    var name: String
+    var descriptions: String
+    var shots_count: Int
+    var created_at: NSDate
+    var updated_at: NSDate
+    var user: DribbbleUser?
     
     init(json: NSDictionary) {
         let dateFor: NSDateFormatter = NSDateFormatter()
@@ -63,34 +63,34 @@ class DribbbleProject: NSObject {
 }
 
 class DribbbleShot: NSObject {
-     var id: Int
-     var title: String
-     var descriptions: String
-     var width: Int
-     var height: Int
-     var images: [String: String] = [
+    var id: Int
+    var title: String
+    var descriptions: String
+    var width: Int
+    var height: Int
+    var images: [String: String] = [
         "hidpi": "",
         "normal": "",
         "teaser": ""
     ]
-     var views_count: Int
-     var likes_count: Int
-     var comments_count: Int
-     var attachments_count: Int
-     var rebounds_count: Int
-     var buckets_count: Int
-     var html_url: String
-     var attachments_url: String
-     var buckets_url: String
-     var comments_url: String
-     var likes_url: String
-     var projects_url: String
-     var rebounds_url: String
-     var tags: [String] = []
-     var user: DribbbleUser?
-     var team: DribbbleTeam?
-     var created_at: NSDate
-     var updated_at: NSDate
+    var views_count: Int
+    var likes_count: Int
+    var comments_count: Int
+    var attachments_count: Int
+    var rebounds_count: Int
+    var buckets_count: Int
+    var html_url: String
+    var attachments_url: String
+    var buckets_url: String
+    var comments_url: String
+    var likes_url: String
+    var projects_url: String
+    var rebounds_url: String
+    var tags: [String] = []
+    var user: DribbbleUser?
+    var team: DribbbleTeam?
+    var created_at: NSDate
+    var updated_at: NSDate
     
     init(json: NSDictionary) {
         let dateFor: NSDateFormatter = NSDateFormatter()
@@ -131,16 +131,17 @@ class DribbbleShot: NSObject {
         
         
     }
+    
 }
 
 class DribbbleAttachment: NSObject {
-     var id: Int
-     var url: String
-     var thumbnail_url: String
-     var size: Int
-     var content_type: String
-     var views_count: Int
-     var created_at: NSDate
+    var id: Int
+    var url: String
+    var thumbnail_url: String
+    var size: Int
+    var content_type: String
+    var views_count: Int
+    var created_at: NSDate
     
     init(json: NSDictionary) {
         let dateFor: NSDateFormatter = NSDateFormatter()
@@ -157,38 +158,38 @@ class DribbbleAttachment: NSObject {
 }
 
 class DribbbleUser: NSObject {
-     var id: Int
-     var name: String
-     var username: String
-     var html_url: String
-     var avatar_url: String
-     var bio : String
-     var location: String
-     var links: [String: String] = [
+    var id: Int
+    var name: String
+    var username: String
+    var html_url: String
+    var avatar_url: String
+    var bio : String
+    var location: String
+    var links: [String: String] = [
         "web": "",
         "twitter" : ""
     ]
-     var buckets_count: Int
-     var comments_received_count: Int
-     var followers_count: Int
-     var followings_count: Int
-     var likes_count: Int
-     var likes_received_count: Int
-     var projects_count: Int
-     var rebounds_received_count: Int
-     var shots_count: Int
-     var teams_count: Int
-     var can_upload_shot: Bool = false
-     var type: String
-     var pro: Bool = false
-     var buckets_url: String
-     var followers_url: String
-     var following_url: String
-     var likes_url: String
-     var shots_url: String
-     var teams_url: String
-     var created_at: NSDate
-     var updated_at: NSDate
+    var buckets_count: Int
+    var comments_received_count: Int
+    var followers_count: Int
+    var followings_count: Int
+    var likes_count: Int
+    var likes_received_count: Int
+    var projects_count: Int
+    var rebounds_received_count: Int
+    var shots_count: Int
+    var teams_count: Int
+    var can_upload_shot: Bool = false
+    var type: String
+    var pro: Bool = false
+    var buckets_url: String
+    var followers_url: String
+    var following_url: String
+    var likes_url: String
+    var shots_url: String
+    var teams_url: String
+    var created_at: NSDate
+    var updated_at: NSDate
     
     init(json: NSDictionary) {
         let dateFor: NSDateFormatter = NSDateFormatter()
