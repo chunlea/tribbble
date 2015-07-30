@@ -28,15 +28,8 @@ class DribbbleAPI {
     }
 
     // Get token
-    func getToken(code: String)->Void {
-        
-        
-        //        var params: [String: AnyObject?] = [
-        //            "client_id": NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleClientID")!,
-        //            "client_secret": NSBundle.mainBundle().objectForInfoDictionaryKey("DribbbleSecret")!,
-        //            "code": code,
-        //            "redirect_uri": "tribbble://oauth-token"
-        //        ]
+    func getToken(code: String, callback: ()->Void) {
+
         
         let params = "client_id=\(client_id)&client_secret=\(client_secret)&code=\(code)&redirect_uri=\(redirect_uri)"
 
@@ -60,9 +53,8 @@ class DribbbleAPI {
             if (error == nil ) {
                 if (parsedData != nil){
                     guard let tokenStr: String = (parsedData["access_token"] as! String) else { "BadToken" }
-                    print(tokenStr)
-                    print(Auth.setToken(tokenStr))
-                    print(Auth.getToken())
+                    Auth.setToken(tokenStr)
+                    callback()
                 } else {
                     print("Status Code:\(httpResp.statusCode)\n")
                 }
@@ -89,21 +81,21 @@ class DribbbleAPI {
         NSURLSession.sharedSession().dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
-            let parsedData: [AnyObject]!
-      
-            if data != nil {
-                do {
-                    parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options:  NSJSONReadingOptions()) as! [AnyObject]
-                } catch _ {
+            let httpResp = response as! NSHTTPURLResponse
+            
+            print(httpResp.statusCode)
+            
+            if (error == nil && httpResp.statusCode == 200 ) {
+                let parsedData: [AnyObject]!
+                if data != nil {
+                    do {
+                        parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options:  NSJSONReadingOptions()) as! [AnyObject]
+                    } catch _ {
+                        parsedData = nil
+                    }
+                } else {
                     parsedData = nil
                 }
-            } else {
-                parsedData = nil
-            }
-            
-            if (error == nil ) {
-                let httpResp = response as! NSHTTPURLResponse
-
                 if (parsedData != nil){
                     for shot in parsedData {
                         result.append(DribbbleShot(json:shot as! NSDictionary))

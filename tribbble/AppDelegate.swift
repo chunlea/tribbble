@@ -31,7 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         let code = NSURLComponents(URL: url, resolvingAgainstBaseURL: true)?.queryItems?.filter({(item) in item.name == "code"}).first!.value
         
-        DribbbleAPI().getToken(code!)
+        DribbbleAPI().getToken(code!) {
+            dispatch_async(dispatch_get_main_queue()) {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                self.window?.rootViewController = storyboard.instantiateInitialViewController()
+            }
+        }
         
         return true
     }

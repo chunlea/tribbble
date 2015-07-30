@@ -43,7 +43,6 @@ class HomeViewController: UICollectionViewController {
     }
     
     func startRefresh() {
-        print("startRefresh")
         page = 1
         DribbbleAPI().getShots(page) {
             (result, error) -> Void in
@@ -74,16 +73,21 @@ class HomeViewController: UICollectionViewController {
         // Change the view for Logged user
         // Do any additional setup after loading the view.
         
-        print(Auth.logged())
-        
         if Auth.logged() {
             navigationController?.navigationBar.barTintColor = UIColor(red: 236/255.0, green: 73/255.0, blue: 139/255.0, alpha: 0.6)
             navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
             LoginButtonsView.hidden = true
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Done, target: self, action: "logout")
         } else {
             navigationController?.navigationBar.barTintColor = UIColor.clearColor()
             LoginButtonsView.hidden = false
+            navigationItem.rightBarButtonItem = nil
         }
+    }
+    
+    func logout() {
+        Auth.logout()
+        self.viewWillAppear(true)
     }
 
     override func didReceiveMemoryWarning() {
