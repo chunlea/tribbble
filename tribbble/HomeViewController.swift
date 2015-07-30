@@ -12,7 +12,9 @@ private let reuseIdentifier = "Cell"
 
 class HomeViewController: UICollectionViewController {
     private let reuseIdentifier = "ShotCell"
-    private var shots:[DribbbleShot] = []
+    private var shots: [DribbbleShot] = []
+    private let refreshControl = UIRefreshControl()
+    private var page: Int = 1
 
     @IBOutlet var LoginButtonsView: UIView!
     
@@ -33,11 +35,38 @@ class HomeViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        DribbbleAPI().getShots() {
+        refreshControl.addTarget(self, action: "startRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView?.addSubview(refreshControl)
+        
+        startRefresh()
+        
+    }
+    
+    func startRefresh() {
+        print("startRefresh")
+        page = 1
+        DribbbleAPI().getShots(page) {
             (result, error) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
                 self.shots = result
-                print(self.shots)
+                self.page += 1
                 self.collectionView?.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height){
+            DribbbleAPI().getShots(page) {
+                (result, error) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.shots += result
+                    self.page += 1
+                    self.collectionView?.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            }
         }
     }
     
@@ -109,13 +138,44 @@ class HomeViewController: UICollectionViewController {
         cell.backgroundColor = UIColor.whiteColor()
         
         let shot = shots[indexPath.row]
-        cell.viewsCount.text = String(shot.views_count)
-        cell.likesCount.text = String(shot.likes_count)
-        cell.commentsCount.text = String(shot.comments_count)
+        
+        if shot.views_count == 0 {
+            cell.viewsCount.text = ""
+            cell.viewsIconWidth.constant = 0
+            cell.viewsIcon.setNeedsUpdateConstraints();
+        } else {
+            cell.viewsCount.text = String(shot.views_count)
+            cell.viewsIconWidth.constant = 16
+            cell.viewsIcon.setNeedsUpdateConstraints()
+        }
+        
+        if shot.likes_count == 0 {
+            cell.likesCount.text = ""
+            cell.likesIconWidth.constant = 0
+            cell.likesIcon.setNeedsUpdateConstraints();
+        } else {
+            cell.likesCount.text = String(shot.likes_count)
+            cell.likesIconWidth.constant = 16
+            cell.likesIcon.setNeedsUpdateConstraints()
+        }
+        
+        if shot.comments_count == 0 {
+            cell.commentsCount.text = ""
+            cell.commentsIconWidth.constant = 0
+            cell.commentsIcon.setNeedsUpdateConstraints();
+        } else {
+            cell.commentsCount.text = String(shot.comments_count)
+            cell.commentsIconWidth.constant = 16
+            cell.commentsIcon.setNeedsUpdateConstraints()
+        }
+
         let url: NSURL = NSURL(string: shot.images["normal"]!)!
-        let resultsData = NSData(contentsOfURL: url)
-        cell.shotImage.image = UIImage(data: resultsData!)
- 
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                cell.shotImage.image = UIImage(data: data!)
+            }
+        }.resume()
+        
         return cell
     }
 
@@ -156,6 +216,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            return CGSize(width: 168, height: 130)
+            return CGSize(width: 150, height: 130)
     }
 }

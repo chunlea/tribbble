@@ -19,7 +19,7 @@
         <scene sceneID="097-X1-Ok3">
             <objects>
                 <collectionViewController id="Gnh-47-1FK" customClass="HomeViewController" customModule="tribbble" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="dyD-yi-VeJ">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="dyD-yi-VeJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -45,6 +45,9 @@
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-eye" translatesAutoresizingMaskIntoConstraints="NO" id="3Qa-oQ-ztK">
                                             <rect key="frame" x="7" y="178" width="22" height="13"/>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="HbK-u1-JCr"/>
+                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="views" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6J-ew-odg">
                                             <rect key="frame" x="31" y="175" width="33" height="15.5"/>
@@ -63,6 +66,9 @@
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-heart" translatesAutoresizingMaskIntoConstraints="NO" id="Svn-sh-7fx">
                                             <rect key="frame" x="152" y="178" width="16" height="13"/>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="16" id="0bz-8Y-oaq"/>
+                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkO-HJ-5IK">
                                             <rect key="frame" x="170" y="175" width="26" height="15.5"/>
@@ -74,6 +80,9 @@
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-comment" translatesAutoresizingMaskIntoConstraints="NO" id="KTi-Ce-Ih7">
                                             <rect key="frame" x="68" y="178" width="16" height="13"/>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="16" id="7k5-iQ-Ipp"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <animations/>
@@ -100,9 +109,15 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="commentsCount" destination="UBU-YR-fip" id="cN3-cR-94C"/>
+                                    <outlet property="commentsIcon" destination="KTi-Ce-Ih7" id="lBz-HZ-ybh"/>
+                                    <outlet property="commentsIconWidth" destination="7k5-iQ-Ipp" id="FUZ-GA-eoj"/>
                                     <outlet property="likesCount" destination="fkO-HJ-5IK" id="x3G-la-Oat"/>
+                                    <outlet property="likesIcon" destination="Svn-sh-7fx" id="Cz7-wr-lCw"/>
+                                    <outlet property="likesIconWidth" destination="0bz-8Y-oaq" id="xKk-zA-cyg"/>
                                     <outlet property="shotImage" destination="WSW-V3-iY0" id="jcB-uu-clb"/>
                                     <outlet property="viewsCount" destination="f6J-ew-odg" id="6cQ-W9-MLO"/>
+                                    <outlet property="viewsIcon" destination="3Qa-oQ-ztK" id="Dnk-Qm-JUO"/>
+                                    <outlet property="viewsIconWidth" destination="HbK-u1-JCr" id="rjH-64-5cK"/>
                                     <segue destination="Dgj-sb-jZv" kind="showDetail" identifier="OpenShotDetail" id="7Rm-Vp-GeE"/>
                                 </connections>
                             </collectionViewCell>
@@ -191,7 +206,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenBg" translatesAutoresizingMaskIntoConstraints="NO" id="kGN-mz-qr6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kGN-mz-qr6">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <animations/>
                                 <constraints>
@@ -207,7 +222,7 @@
                                 <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.84805846419999997" green="0.29406326929999999" blue="0.162838809" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentCell" rowHeight="110" id="WMp-rL-WgW">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentCell" rowHeight="110" id="WMp-rL-WgW" customClass="ShotCommentCell" customModule="tribbble" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="600" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WMp-rL-WgW" id="kGZ-BR-as4">
@@ -222,15 +237,9 @@
                                                         <constraint firstAttribute="height" constant="64" id="QBT-hT-Iba"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1w-NA-iya">
-                                                    <rect key="frame" x="106" y="19" width="316" height="77"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comments" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1w-NA-iya">
+                                                    <rect key="frame" x="87" y="10" width="505" height="89.5"/>
                                                     <animations/>
-                                                    <string key="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -238,43 +247,55 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string
                                             </subviews>
                                             <animations/>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="U1w-NA-iya" secondAttribute="trailing" id="7E6-vk-YaT"/>
                                                 <constraint firstItem="qqL-QK-def" firstAttribute="top" secondItem="kGZ-BR-as4" secondAttribute="topMargin" constant="5" id="9Cl-53-dhQ"/>
+                                                <constraint firstItem="U1w-NA-iya" firstAttribute="top" secondItem="kGZ-BR-as4" secondAttribute="topMargin" constant="2" id="Itk-CJ-tFz"/>
                                                 <constraint firstItem="qqL-QK-def" firstAttribute="leading" secondItem="kGZ-BR-as4" secondAttribute="leadingMargin" constant="5" id="SsI-ni-V1t"/>
+                                                <constraint firstItem="U1w-NA-iya" firstAttribute="leading" secondItem="qqL-QK-def" secondAttribute="trailing" constant="10" id="ecc-cT-LUt"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="U1w-NA-iya" secondAttribute="bottom" constant="2" id="ho0-Og-ghe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <connections>
+                                            <outlet property="avatar" destination="qqL-QK-def" id="rMX-7p-y1b"/>
+                                            <outlet property="comment" destination="U1w-NA-iya" id="Qn6-Ho-a6R"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LfT-ac-UPc">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfT-ac-UPc">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Comment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7hM-TX-ZmX">
-                                        <rect key="frame" x="6" y="6" width="588" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Comment" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7hM-TX-ZmX">
+                                        <rect key="frame" x="20" y="6" width="578" height="32"/>
                                         <animations/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.28627450980000002" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="7hM-TX-ZmX" firstAttribute="leading" secondItem="LfT-ac-UPc" secondAttribute="leading" constant="6" id="2Xg-2S-bkc"/>
+                                    <constraint firstItem="7hM-TX-ZmX" firstAttribute="leading" secondItem="LfT-ac-UPc" secondAttribute="leading" constant="20" id="2Xg-2S-bkc"/>
+                                    <constraint firstAttribute="height" constant="44" id="NoD-ME-JL6"/>
                                     <constraint firstAttribute="bottom" secondItem="7hM-TX-ZmX" secondAttribute="bottom" constant="6" id="a7d-dV-3Qc"/>
                                     <constraint firstItem="7hM-TX-ZmX" firstAttribute="top" secondItem="LfT-ac-UPc" secondAttribute="top" constant="6" id="do0-tp-6DG"/>
-                                    <constraint firstAttribute="trailing" secondItem="7hM-TX-ZmX" secondAttribute="trailing" constant="6" id="u0N-Zv-HKm"/>
+                                    <constraint firstAttribute="trailing" secondItem="7hM-TX-ZmX" secondAttribute="trailing" constant="2" id="u0N-Zv-HKm"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRe-yu-Xp8">
-                                <rect key="frame" x="30" y="30" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRe-yu-Xp8">
+                                <rect key="frame" x="30" y="30" width="48" height="48"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.84805846419999997" green="0.29406326929999999" blue="0.162838809" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.28627450980392155" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="amC-Xa-5Zs"/>
-                                    <constraint firstAttribute="height" constant="30" id="vsx-nH-Aa4"/>
+                                    <constraint firstAttribute="width" constant="48" id="amC-Xa-5Zs"/>
+                                    <constraint firstAttribute="height" constant="48" id="vsx-nH-Aa4"/>
                                 </constraints>
-                                <state key="normal" title="Back"/>
+                                <state key="normal" image="icon-back_arrow">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <segue destination="jZO-n0-g0m" kind="unwind" unwindAction="unwindForSegue:towardsViewController:" id="MPk-Q5-fBu"/>
                                 </connections>
@@ -301,6 +322,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string
                         <outlet property="backToHomeButton" destination="eRe-yu-Xp8" id="srF-ep-0lO"/>
                         <outlet property="commentInputView" destination="LfT-ac-UPc" id="YhH-PG-yzL"/>
                         <outlet property="commentsListView" destination="6HU-y0-g0V" id="y8J-NK-3pD"/>
+                        <outlet property="shotImage" destination="kGN-mz-qr6" id="ZRP-qN-K9s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C36-Ow-USk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -330,7 +352,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string
     </scenes>
     <resources>
         <image name="AppLogo" width="180" height="180"/>
-        <image name="LaunchScreenBg" width="1024" height="1024"/>
+        <image name="icon-back_arrow" width="13" height="21"/>
         <image name="icon-comment" width="16" height="13"/>
         <image name="icon-eye" width="22" height="13"/>
         <image name="icon-heart" width="16" height="13"/>

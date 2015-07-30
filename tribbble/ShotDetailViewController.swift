@@ -10,19 +10,37 @@ import UIKit
 
 class ShotDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     internal var shot: DribbbleShot?
+    var comments: [DribbbleComment] = []
 
     @IBOutlet weak var backToHomeButton: UIButton!
     @IBOutlet weak var commentInputView: UIView!
     @IBOutlet weak var commentsListView: UITableView!
+    @IBOutlet weak var shotImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        commentsListView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "commentCell")
+        commentsListView.dequeueReusableCellWithIdentifier("commentCell")
         commentsListView.delegate = self
         commentsListView.dataSource = self
+        
+        backToHomeButton.layer.cornerRadius = 24
 
-        // Do any additional setup after loading the view.
-        print(shot?.id)
+        // Do any additional setup after loading the view.        
+        let url: NSURL = NSURL(string: shot!.images["normal"]!)!
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.shotImage.image = UIImage(data: data!)
+            }
+        }.resume()
+        
+        
+        DribbbleAPI().getCommentsByShot(shot!) {
+            (result, error) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.comments = result
+                self.commentsListView?.reloadData()
+            }
+        }
     }
     
     @IBAction override func unwindForSegue(unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
@@ -46,13 +64,29 @@ class ShotDetailViewController: UIViewController, UITableViewDataSource, UITable
     */
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return comments.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath) as UITableViewCell
+        let cell : ShotCommentCell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath) as! ShotCommentCell
         
-        cell.textLabel!.text = "Good"
+        let comment = comments[indexPath.row]
+        
+        let commentAttributedText: NSAttributedString?
+        do {
+            commentAttributedText = try NSAttributedString(data: comment.body.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+        } catch _ {
+            commentAttributedText = nil
+        }
+        cell.comment.attributedText = commentAttributedText
+        
+        let url: NSURL = NSURL(string: (comment.user?.avatar_url)!)!
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                cell.avatar.image = UIImage(data: data!)
+            }
+        }.resume()
+        
         return cell
     }
 

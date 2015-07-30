@@ -15,6 +15,14 @@ class DribbbleShotCell: UICollectionViewCell {
     @IBOutlet weak var commentsCount: UILabel!
     @IBOutlet weak var likesCount: UILabel!
     
+    @IBOutlet weak var viewsIcon: UIImageView!
+    @IBOutlet weak var likesIcon: UIImageView!
+    @IBOutlet weak var commentsIcon: UIImageView!
+    
+    
+    @IBOutlet weak var commentsIconWidth: NSLayoutConstraint!
+    @IBOutlet weak var likesIconWidth: NSLayoutConstraint!
+    @IBOutlet weak var viewsIconWidth: NSLayoutConstraint!
     override func drawRect(rect: CGRect)
     {
         layer.masksToBounds = false

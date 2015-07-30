@@ -147,13 +147,39 @@ class DribbbleAttachment: NSObject {
         let dateFor: NSDateFormatter = NSDateFormatter()
         dateFor.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         created_at = dateFor.dateFromString(json["created_at"] as! String)!
-
+        
         id = json["id"] as? Int ?? 0
         url = json["url"] as? String ?? ""
         thumbnail_url = json["thumbnail_url"] as? String ?? ""
         size = json["size"] as? Int ?? 0
         content_type = json["content_type"] as? String ?? ""
         views_count = json["views_count"] as? Int ?? 0
+    }
+}
+
+class DribbbleComment: NSObject {
+    var id: Int
+    var body: String
+    var likes_count: Int
+    var likes_url: String
+    var created_at: NSDate
+    var updated_at: NSDate
+    var user: DribbbleUser?
+    
+    init(json: NSDictionary) {
+        let dateFor: NSDateFormatter = NSDateFormatter()
+        dateFor.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        created_at = dateFor.dateFromString(json["created_at"] as! String)!
+        updated_at = dateFor.dateFromString(json["updated_at"] as! String)!
+        
+        id = json["id"] as? Int ?? 0
+        body = json["body"] as? String ?? ""
+        likes_url = json["likes_url"] as? String ?? ""
+        likes_count = json["likes_count"] as? Int ?? 0
+        
+        if json["user"]!.isKindOfClass(NSDictionary) {
+            user = DribbbleUser(json: json["user"] as! NSDictionary)
+        }
     }
 }
 

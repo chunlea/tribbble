@@ -10,6 +10,9 @@ import UIKit
 
 class ShotCommentCell: UITableViewCell {
 
+    @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var comment: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
