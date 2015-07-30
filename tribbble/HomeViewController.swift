@@ -112,8 +112,10 @@ class HomeViewController: UICollectionViewController {
         cell.viewsCount.text = String(shot.views_count)
         cell.likesCount.text = String(shot.likes_count)
         cell.commentsCount.text = String(shot.comments_count)
-        cell.shotImage.image = UIImage(named: "LaunchScreenBg")
-    
+        let url: NSURL = NSURL(string: shot.images["normal"]!)!
+        let resultsData = NSData(contentsOfURL: url)
+        cell.shotImage.image = UIImage(data: resultsData!)
+ 
         return cell
     }
 
