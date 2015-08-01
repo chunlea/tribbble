@@ -29,7 +29,7 @@ class HomeViewController: UICollectionViewController {
         LoginButtonsView.translatesAutoresizingMaskIntoConstraints = false
         LoginButtonsView.hidden = true
         view.addSubview(LoginButtonsView)
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-20-[LoginButtonsView]-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-(-20)-[LoginButtonsView]-(-20)-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[LoginButtonsView]-|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: ["height": 64.0], views: ["LoginButtonsView": LoginButtonsView]))
 
         // Uncomment the following line to preserve selection between presentations
