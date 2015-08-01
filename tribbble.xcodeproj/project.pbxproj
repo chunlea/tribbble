@@ -15,6 +15,7 @@
 		8C3599211B63D37800A85EDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C35991F1B63D37800A85EDC /* LaunchScreen.storyboard */; };
 		8C35992C1B63D37800A85EDC /* tribbbleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C35992B1B63D37800A85EDC /* tribbbleTests.swift */; };
 		8C3599371B63D37800A85EDC /* tribbbleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3599361B63D37800A85EDC /* tribbbleUITests.swift */; };
+		8CB219701B6B4B440063F34D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2196F1B6B4B440063F34D /* Extensions.swift */; };
 		8CB2FFC81B661CC000B2D274 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */; };
 		8CB2FFCC1B66228200B2D274 /* DribbbleShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */; };
 		8CD7D2D01B6898C100E5ABA8 /* DribbbleModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7D2CF1B6898C100E5ABA8 /* DribbbleModels.swift */; };
@@ -56,6 +57,7 @@
 		8C3599321B63D37800A85EDC /* tribbbleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tribbbleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3599361B63D37800A85EDC /* tribbbleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tribbbleUITests.swift; sourceTree = "<group>"; };
 		8C3599381B63D37800A85EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CB2196F1B6B4B440063F34D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleShotCell.swift; sourceTree = "<group>"; };
 		8CD7D2CF1B6898C100E5ABA8 /* DribbbleModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleModels.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				8CD7D2D11B68D09B00E5ABA8 /* ShotDetailViewController.swift */,
 				8CD7D2D31B68F70C00E5ABA8 /* ShotCommentCell.swift */,
 				8CF822FA1B6A21AE00DDDF2F /* tribbble-Bridging-Header.h */,
+				8CB2196F1B6B4B440063F34D /* Extensions.swift */,
 			);
 			path = tribbble;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				8CB2FFCC1B66228200B2D274 /* DribbbleShotCell.swift in Sources */,
 				8CB2FFC81B661CC000B2D274 /* HomeViewController.swift in Sources */,
 				8C0534501B67EC90002467CC /* Auth.swift in Sources */,
+				8CB219701B6B4B440063F34D /* Extensions.swift in Sources */,
 				8CF822FD1B6A21AE00DDDF2F /* KeychainWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         session.configuration.timeoutIntervalForRequest = 30.0
         session.configuration.timeoutIntervalForResource = 60.0
         session.configuration.HTTPMaximumConnectionsPerHost = 1
+
+        let urlCache = NSURLCache(memoryCapacity: 4*1024*1024, diskCapacity: 20*1024*1024, diskPath: nil)
+        NSURLCache.setSharedURLCache(urlCache)
         
         return true
     }

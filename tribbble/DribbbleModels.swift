@@ -98,8 +98,8 @@ class DribbbleShot: NSObject {
         created_at = dateFor.dateFromString(json["created_at"] as! String)!
         updated_at = dateFor.dateFromString(json["updated_at"] as! String)!
         
-        id = json["id"] as! Int ?? 0
-        title = json["title"] as! String
+        id = json["id"] as? Int ?? 0
+        title = (json["title"] as? String)! ?? ""
         descriptions = json["descriptions"] as? String ?? ""
         width = json["width"] as? Int ?? 0
         height = json["height"] as? Int ?? 0

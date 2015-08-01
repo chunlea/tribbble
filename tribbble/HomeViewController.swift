@@ -173,12 +173,7 @@ class HomeViewController: UICollectionViewController {
             cell.commentsIcon.setNeedsUpdateConstraints()
         }
 
-        let url: NSURL = NSURL(string: shot.images["normal"]!)!
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            dispatch_async(dispatch_get_main_queue()) {
-                cell.shotImage.image = UIImage(data: data!)
-            }
-        }.resume()
+        cell.shotImage.imageFromUrl(shot.images["normal"]!)
         
         return cell
     }
