@@ -15,6 +15,7 @@ class HomeViewController: UICollectionViewController {
     private var shots: [DribbbleShot] = []
     private let refreshControl = UIRefreshControl()
     private var page: Int = 1
+    private var loadingMore: Bool = false
 
     @IBOutlet var LoginButtonsView: UIView!
     
@@ -56,15 +57,23 @@ class HomeViewController: UICollectionViewController {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height){
+        if (scrollView.contentOffset.y + scrollView.contentSize.height > scrollView.frame.size.height * 0.8){
+            if loadingMore {
+                return
+            }
+            
+            loadingMore = true
             DribbbleAPI().getShots(page) {
                 (result, error) -> Void in
+                let lastItem = self.shots.count
+                self.shots += result
+                let indexPaths = (lastItem..<self.shots.count).map {NSIndexPath(forItem: $0, inSection: 0)}
+                
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.shots += result
+                    self.collectionView?.insertItemsAtIndexPaths(indexPaths)
                     self.page += 1
-                    self.collectionView?.reloadData()
-                    self.refreshControl.endRefreshing()
                 }
+                self. loadingMore = false
             }
         }
     }
