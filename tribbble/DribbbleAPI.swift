@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class DribbbleAPI {
+    static let shared = DribbbleAPI()
+    
     let baseURL: String = "https://api.dribbble.com/v1"
     let tokenURL: NSURL = NSURL(string: "https://dribbble.com/oauth/token")!
 
@@ -71,16 +73,58 @@ class DribbbleAPI {
     }
     
     func getShots(page: Int=1, callback: (result: [DribbbleShot], error: String?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: baseURL + "/shots" + "?page=\(page)")!)
-        var result: [DribbbleShot] = []
-        request.HTTPMethod = "GET"
-        request.setValue("Bearer \(access_token)", forHTTPHeaderField: "Authorization")
-
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let endPoint: String = baseURL + "/shots"
         
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {
+        var result: [DribbbleShot] = []
+        
+        let params = ["page": String(page)]
+        
+        HTTPTask().requestURL(url: NSURL(string: endPoint)!, parameters: params) {
             (data, response, error) -> Void in
-            
+                let httpResp = response as! NSHTTPURLResponse
+    
+                print(httpResp.statusCode)
+    
+                if (error == nil && httpResp.statusCode == 200 ) {
+                    let parsedData: [AnyObject]!
+                    if data != nil {
+                        do {
+                            parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options:  NSJSONReadingOptions()) as! [AnyObject]
+                        } catch _ {
+                            parsedData = nil
+                        }
+                    } else {
+                        parsedData = nil
+                    }
+                    if (parsedData != nil){
+                        for shot in parsedData {
+                            result.append(DribbbleShot(json:shot as! NSDictionary))
+                        }
+                    } else {
+                        print("Status Code:\(httpResp.statusCode)\n")
+                    }
+                    dispatch_async(dispatch_get_main_queue(), {
+                        callback(result: result, error: nil)
+                    })
+                    
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        callback(result: result, error: "Error!")
+                    })
+                }
+
+        }
+    }
+
+    func getCommentsByShot(shot: DribbbleShot, callback: (result: [DribbbleComment], error: String?) -> Void) {
+        let endPoint: String = baseURL + "/shots/" + String(shot.id) + "/comments"
+        
+        var result: [DribbbleComment] = []
+        
+        let params = ["page": String(1)]
+        
+        HTTPTask().requestURL(url: NSURL(string: endPoint)!, parameters: params) {
+            (data, response, error) -> Void in
             let httpResp = response as! NSHTTPURLResponse
             
             print(httpResp.statusCode)
@@ -98,53 +142,6 @@ class DribbbleAPI {
                 }
                 if (parsedData != nil){
                     for shot in parsedData {
-                        result.append(DribbbleShot(json:shot as! NSDictionary))
-                    }
-                } else {
-                    print("Status Code:\(httpResp.statusCode)\n")
-                }
-                dispatch_async(dispatch_get_main_queue(), {
-                    callback(result: result, error: nil)
-                })
-                
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    callback(result: result, error: "Error!")
-                })
-            }
-
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }.resume()
-    }
-
-    func getCommentsByShot(shot: DribbbleShot, callback: (result: [DribbbleComment], error: String?) -> Void) {
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: baseURL + "/shots/" + String(shot.id) + "/comments")!)
-        var result: [DribbbleComment] = []
-        request.HTTPMethod = "GET"
-        request.setValue("Bearer \(access_token)", forHTTPHeaderField: "Authorization")
-        
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            (data, response, error) -> Void in
-            
-            let parsedData: [AnyObject]!
-            if data != nil {
-                do {
-                    parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options:  NSJSONReadingOptions()) as! [AnyObject]
-                } catch _ {
-                    parsedData = nil
-                }
-            } else {
-                parsedData = nil
-            }
-            
-            let httpResp = response as! NSHTTPURLResponse
-            
-            if (error == nil ) {
-                if (parsedData != nil){
-                    for shot in parsedData {
                         result.append(DribbbleComment(json:shot as! NSDictionary))
                     }
                 } else {
@@ -160,8 +157,8 @@ class DribbbleAPI {
                 })
             }
             
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }.resume()
+        }
+
     }
 
 }

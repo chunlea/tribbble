@@ -18,6 +18,7 @@
 		8CB219701B6B4B440063F34D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2196F1B6B4B440063F34D /* Extensions.swift */; };
 		8CB2FFC81B661CC000B2D274 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */; };
 		8CB2FFCC1B66228200B2D274 /* DribbbleShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */; };
+		8CCBC2F01B6F087500827A76 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBC2EF1B6F087500827A76 /* HTTPTask.swift */; };
 		8CD7D2D01B6898C100E5ABA8 /* DribbbleModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7D2CF1B6898C100E5ABA8 /* DribbbleModels.swift */; };
 		8CD7D2D21B68D09B00E5ABA8 /* ShotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7D2D11B68D09B00E5ABA8 /* ShotDetailViewController.swift */; };
 		8CD7D2D41B68F70C00E5ABA8 /* ShotCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD7D2D31B68F70C00E5ABA8 /* ShotCommentCell.swift */; };
@@ -60,6 +61,7 @@
 		8CB2196F1B6B4B440063F34D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8CB2FFC71B661CC000B2D274 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8CB2FFCB1B66228200B2D274 /* DribbbleShotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleShotCell.swift; sourceTree = "<group>"; };
+		8CCBC2EF1B6F087500827A76 /* HTTPTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		8CD7D2CF1B6898C100E5ABA8 /* DribbbleModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleModels.swift; sourceTree = "<group>"; };
 		8CD7D2D11B68D09B00E5ABA8 /* ShotDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailViewController.swift; sourceTree = "<group>"; };
 		8CD7D2D31B68F70C00E5ABA8 /* ShotCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCommentCell.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				8CD7D2D31B68F70C00E5ABA8 /* ShotCommentCell.swift */,
 				8CF822FA1B6A21AE00DDDF2F /* tribbble-Bridging-Header.h */,
 				8CB2196F1B6B4B440063F34D /* Extensions.swift */,
+				8CCBC2EF1B6F087500827A76 /* HTTPTask.swift */,
 			);
 			path = tribbble;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CCBC2F01B6F087500827A76 /* HTTPTask.swift in Sources */,
 				8C35991C1B63D37800A85EDC /* tribbble.xcdatamodeld in Sources */,
 				8CD7D2D21B68D09B00E5ABA8 /* ShotDetailViewController.swift in Sources */,
 				8CD7D2D41B68F70C00E5ABA8 /* ShotCommentCell.swift in Sources */,

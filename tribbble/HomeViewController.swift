@@ -73,7 +73,7 @@ class HomeViewController: UICollectionViewController {
                     self.collectionView?.insertItemsAtIndexPaths(indexPaths)
                     self.page += 1
                 }
-                self. loadingMore = false
+                self.loadingMore = false
             }
         }
     }
